@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momentum App v2</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js" type="module" defer></script>
+</head>
+<body>
+    <div id="app_container">
+        <div class="welcome-screen" id="welcome_screen">
+            
+        </div>
+        <div id="main" style="display: none">
+            <div class="links">Links</div>
+            <div class="weather">Weather</div>
+            <div class="display">
+                <div id="clock_display">
+                    <div id="clock"></div>
+                    <label class="switch">
+                        <input type="checkbox" id="clock_toggle">
+                        <span class="slider round">
+                            <p class="slider_text_24">24</p>
+                            <p class="slider_text_12">12</p>
+                        </span>
+                    </label>
+                </div>
+                <div id="greet_element"></div>
+                <div>
+                    <input type="text" name="" id="focus_input">
+                    <div id="show_focus" style="display: none">
+                        <div id="focus_text"></div>
+                        <button id="del_focus">Delete</button>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="settings">Settings</div>
+            <div class="todo_list">Todo_List</div>
+        </div>
+    </div>
+</body>
+</html>
