@@ -27,7 +27,8 @@ const createData = (username, email, password) => {
         email: email,
         password: password,
         h12format: false,
-        focus: ''
+        focus: '',
+        todos: []
     })
 }
 

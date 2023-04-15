@@ -34,11 +34,29 @@
                         <div id="focus_text"></div>
                         <button id="del_focus">Delete</button>
                     </div>
-                    
                 </div>
             </div>
             <div class="settings">Settings</div>
-            <div class="todo_list">Todo_List</div>
+            <div class="todo_list" id="todo_list">
+                <button class="__open_btn" id="open_btn" >Todo</button>
+
+                <div id="form_popup">
+                    <div id="form_container">
+                        <div id="todo_app_title">
+                            <h3>Todo List</h3>
+                            <button class="__close_btn" id="close_btn">&times;</button>
+                        </div>
+
+                        <div id="todo_inputs">
+                            <input type="text" id="todo_input_text">
+                            <button id="add_btn">&plus;</button>
+                        </div>
+                        
+
+                        <div id="todo_display"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
