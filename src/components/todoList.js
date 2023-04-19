@@ -1,25 +1,18 @@
 const todoList = () => {
 // Model
 
-let userData;
+let todos;
 
 const getData = () => {
-    const loadData = JSON.parse(localStorage.getItem('userData'))
-    if(Array.isArray(loadData) && loadData.length > 0){
-        document.getElementById('welcome_screen').style.display = 'none'
-        document.getElementById('main').style.display = ''
-        return userData = loadData
+    const loadData = JSON.parse(localStorage.getItem('todos'))
+    if(Array.isArray(loadData)){
+        return todos = loadData
     }else {
-        return userData = []
+        return todos = []
     }
 }
 
 getData();
-
-let todos;
-
-todos = userData[0].todos
-
 
 const createTodoData = (title) => {
     const id = Math.floor(Math.random() * 100000000)
@@ -39,8 +32,8 @@ const removeTodoData = (todoId) => {
 
 }
 
-const saveTodoData = (userData) => {
-    localStorage.setItem('userData', JSON.stringify(userData))
+const saveTodoData = (todos) => {
+    localStorage.setItem('todos', JSON.stringify(todos))
 
 }
 
@@ -62,7 +55,7 @@ const addTodoData = () => {
         alert('Please enter a value')
     }else {
         createTodoData(todo_input.value)
-        saveTodoData(userData)
+        saveTodoData(todos)
         render()
     }
     
@@ -72,12 +65,12 @@ const deleteTodo = (e) => {
    const todoId = e.target.id
    
    removeTodoData(parseInt(todoId))
-   saveTodoData(userData)
+   saveTodoData(todos)
    render();
 
 }
 
-// Event Listenere for todo input
+// Event Listener for todo input
 
 document.getElementById('todo_input_text').addEventListener('keydown', (e) => {
     e.key === 'Enter' ? addTodoData() : false
