@@ -2,13 +2,14 @@ import clock from "../services/utils/clock.js"
 
 const display = () => {   
 
+// Model
+
+
 let userData;
 
     const getData = () => {
         const loadData = JSON.parse(localStorage.getItem('userData'))
-        if(Array.isArray(loadData) && loadData.length > 0){
-            document.getElementById('welcome_screen').style.display = 'none'
-            document.getElementById('main').style.display = 'block'
+        if(Array.isArray(loadData)){
             return userData = loadData
         }else {
             return userData = []
@@ -17,73 +18,108 @@ let userData;
     
 getData();    
 
+let focusData;
 
-// HTML Elements
-
-const greetElement = document.getElementById('greet_element')
-const focus_input = document.getElementById('focus_input')
-const focus_text= document.getElementById('focus_text')
-const show_focus = document.getElementById('show_focus')
-const del_focus = document.getElementById('del_focus')
-const username  =  userData.map(user => {return user.username})
-const focus = userData.map(user => {return user.focus}).flat().toString();
-
-console.log(focus)
-
-// hide text when input is empty
-
-    if(focus !== ''){
-        focus_text.innerHTML = focus
-        show_focus.style.display = 'flex'
-        focus_input.style.display = 'none'
-    }else{
-        show_focus.style.display = 'none'
-        focus_input.style.display = 'block'
+const getFocusData = () => {
+    const loadFocusData = JSON.parse(localStorage.getItem('focusData'))
+    if(Array.isArray(loadFocusData) && loadFocusData.length > -1){
+        return focusData = loadFocusData
+    }else {
+        return focusData = []
     }
-    
+}
 
+getFocusData();
+
+const createFocus = (focus) => {
+
+    const id = Math.floor(Math.random() * 1000)
+
+    focusData.push({
+        focus: focus,
+        id: id
+    })
+}
+
+const saveFocus = (focusData) => {
+    localStorage.setItem('focusData', JSON.stringify(focusData))
+}
+
+const removeFocus = (focusId) => {
+    const focusIndex = focusData.findIndex(obj => obj.id === focusId)
+
+    return focusIndex > -1 ? focusData.splice(focusIndex, 1) : focusData
+}
+
+// Controller
+
+const greet = () => {
+    const greet_element = document.getElementById('greet_element')
+    
     if(clock() === 24 || clock() < 12){
-    
-        greetElement.innerText = `Good morning, ${username}`
-    }else if(clock() >= 12 || clock() < 18){
-      
-        greetElement.innerText = `Good afternoon, ${username}`
-        
-    }else if(clock() >= 18 || clock() < 23){
-    
-        greetElement.innerText= `Good evening, ${username}`
-       
+        greet_element.innerText = `Good morning, ${userData[0].username}`
     }
-   
-// Function to update your focus
 
-const updateFocus = (focus) => {
-    return userData.map((user) => {
-        user.focus = focus
-        localStorage.setItem('userData', JSON.stringify(userData))
+    if(clock() >= 12 && clock() <= 17){
+        greet_element.innerText = `Good afternoon, ${userData[0].username}`
     }
-)}  
 
-
-// hide the focus input and show the user's current focus
-
-focus_input.addEventListener("keydown", (e) => {
-    if(e.key === "Enter"){
-        updateFocus(userData[0].username, focus_input.value)
-        show_focus.style.display = "flex"
-        focus_input.style.display = "none"
-        display();
+    if(clock() >= 18 && clock() <= 23){
+        greet_element.innerText = `Good evening, ${userData[0].username}`
     }
-})
+}
 
-// delete user's focus and show the focus input
+greet();
 
-del_focus.addEventListener('click', () => {
-    updateFocus(focus)
-    show_focus.style.display = "none"
-    focus_input.style.display = "block"
-})
+const addFocus = () => {
+    const focus_input = document.getElementById('focus_input')
+
+    if(focus_input.value !== '' ){
+        createFocus(focus_input.value)
+        saveFocus(focusData)
+        render();
+    }else {
+        console.log('Please enter a text')
+    }
+}
+
+const deleteFocus = (e) => {
+    removeFocus(parseInt(e.target.id))
+    saveFocus(focusData)
+    document.getElementById('focus_text').style.display = 'none'
+    document.getElementById('focus_input').style.display = 'block'
 
 }
+
+document.getElementById('focus_input').addEventListener('keydown', (e) => {
+    return e.key === 'Enter' ? addFocus() : false
+})
+
+// View
+
+const render = () => {  
+
+ 
+
+    focusData.map((obj) => {
+        const focus_text = document.getElementById('focus_text')
+        const focus_input = document.getElementById('focus_input')
+       
+        focus_text.innerText = obj.focus
+        focus_text.style.display = 'block'
+        focus_input.style.display = 'none'
+
+        const delBtn = document.createElement('button')
+        delBtn.innerText = 'Delete'
+        delBtn.id = obj.id
+        delBtn.onclick = deleteFocus
+        focus_text.appendChild(delBtn)
+    })
+   
+}
+
+render();
+
+}   
 
 export default display

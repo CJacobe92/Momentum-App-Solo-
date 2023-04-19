@@ -30,8 +30,6 @@ const clock = () => {
     userData.map(user => {return toggle.checked = user.h12format})
 
    
-
-
     const toggleTime = (format) => {
         for(let user of userData){
             if(format === true){
