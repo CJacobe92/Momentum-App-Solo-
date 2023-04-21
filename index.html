@@ -10,11 +10,18 @@
 </head>
 <body>
     <div id="app_container">
-        <div class="welcome-screen" id="welcome_screen">
-            
-        </div>
-        <div id="main" style="display: none">
-            <div class="links">Links</div>
+        <div class="welcome-screen" id="welcome_screen" ></div>
+        <div class="login-screen" id="login_screen">
+            <form id="login_form">
+                <p>Email</p>
+                <input type="email" id="user_email">
+                <p>Password</p>
+                <input type="password" id="user_password">
+                <input type="submit">
+            </form>
+        </div>            
+        <div id="main_screen">
+            <div class="logout" id="logout"></div>
             <div class="weather">Weather</div>
             <div class="display">
                 <div id="clock_display">

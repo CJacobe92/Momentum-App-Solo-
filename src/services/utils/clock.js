@@ -6,8 +6,6 @@ const clock = () => {
     const getData = () => {
         const loadData = JSON.parse(localStorage.getItem('userData'))
         if(Array.isArray(loadData) && loadData.length > 0){
-            document.getElementById('welcome_screen').style.display = 'none'
-            document.getElementById('main').style.display = ''
             return userData = loadData
         }else {
             return userData = []

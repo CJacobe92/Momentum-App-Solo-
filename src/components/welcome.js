@@ -1,5 +1,6 @@
 import { formDatas } from "../services/constants/formDatas.js";
-import display from "./display.js";
+import pageRender from "./pageRender.js";
+import display from "./display.js"
 
 const welcome = () => {
 
@@ -9,9 +10,8 @@ let userData;
 
 const getData = () => {
     const loadData = JSON.parse(localStorage.getItem('userData'))
-    if(Array.isArray(loadData) && loadData.length > 0){
-        document.getElementById('welcome_screen').style.display = 'none'
-        document.getElementById('main').style.display = ''
+    if(Array.isArray(loadData)){
+
         return userData = loadData
     }else {
         return userData = []
@@ -31,8 +31,16 @@ const createData = (username, email, password) => {
     })
 }
 
-const saveData = (userData) => {
+const saveData = (userData, isLoggedIn) => {
+
+    let currentUser = [{
+        currentUser: isLoggedIn
+    }]
+
     localStorage.setItem('userData', JSON.stringify(userData))
+    localStorage.setItem('isLoggedIn', JSON.stringify(currentUser))
+
+    
 }
 
 // Controller
@@ -77,12 +85,11 @@ input_email.addEventListener('keydown', (e) => {
 input_password.addEventListener('keydown', (e) => {
     if(e.key === 'Enter' && input_email.value !== ''){
         document.getElementById('form_password').style.display = 'none'
-        document.getElementById('welcome_screen').style.display = 'none'
-        document.getElementById('main').style.display = 'block'
         
         input_password.style.display = 'none'
         createData(input_name.value, input_email.value, input_password.value)
-        saveData(userData)
+        saveData(userData, input_email.value)
+        pageRender();
         display();
     }else{
         return

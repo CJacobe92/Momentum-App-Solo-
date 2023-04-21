@@ -53,24 +53,6 @@ const removeFocus = (focusId) => {
 
 // Controller
 
-const greet = () => {
-    const greet_element = document.getElementById('greet_element')
-    
-    if(clock() === 24 || clock() < 12){
-        greet_element.innerText = `Good morning, ${userData[0].username}`
-    }
-
-    if(clock() >= 12 && clock() <= 17){
-        greet_element.innerText = `Good afternoon, ${userData[0].username}`
-    }
-
-    if(clock() >= 18 && clock() <= 23){
-        greet_element.innerText = `Good evening, ${userData[0].username}`
-    }
-}
-
-greet();
-
 const addFocus = () => {
     const focus_input = document.getElementById('focus_input')
 
@@ -99,8 +81,25 @@ document.getElementById('focus_input').addEventListener('keydown', (e) => {
 
 const render = () => {  
 
- 
+    // Render the clock
+    userData.map((obj) => {
 
+        const greet_element = document.getElementById('greet_element')
+    
+        if(clock() === 24 || clock() < 12){
+            greet_element.innerText = `Good morning, ${obj.username}`
+        }
+    
+        if(clock() >= 12 && clock() <= 17){
+            greet_element.innerText = `Good afternoon, ${obj.username}`
+        }
+    
+        if(clock() >= 18 && clock() <= 23){
+            greet_element.innerText = `Good evening, ${obj.username}`
+        }
+    })
+
+    // Render the focus display
     focusData.map((obj) => {
         const focus_text = document.getElementById('focus_text')
         const focus_input = document.getElementById('focus_input')
@@ -115,7 +114,6 @@ const render = () => {
         delBtn.onclick = deleteFocus
         focus_text.appendChild(delBtn)
     })
-   
 }
 
 render();
