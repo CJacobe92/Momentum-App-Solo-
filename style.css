@@ -7,6 +7,19 @@
 #app_container{
     min-height: 100vh;
     width: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+html{
+    background-color: black;
+}
+
+body{
+    animation: fadein 1.5s; 
+    background: linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75) );
+    color: white;
 }
 
 /* Login screen / Account creation screen */
