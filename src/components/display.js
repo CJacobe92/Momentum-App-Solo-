@@ -68,8 +68,9 @@ const addFocus = () => {
 const deleteFocus = (e) => {
     removeFocus(parseInt(e.target.id))
     saveFocus(focusData)
-    document.getElementById('focus_text').style.display = 'none'
     document.getElementById('focus_input').style.display = 'block'
+    document.getElementById('focus_pitch').style.display = 'block'
+    document.getElementById('focus_text').style.display = 'none'
 
 }
 
@@ -87,15 +88,15 @@ const render = () => {
         const greet_element = document.getElementById('greet_element')
     
         if(clock() === 24 || clock() < 12){
-            greet_element.innerText = `Good morning, ${obj.username}`
+            greet_element.innerText = `Good morning, ${obj.username}.`
         }
     
         if(clock() >= 12 && clock() <= 17){
-            greet_element.innerText = `Good afternoon, ${obj.username}`
+            greet_element.innerText = `Good afternoon, ${obj.username}.`
         }
     
         if(clock() >= 18 && clock() <= 23){
-            greet_element.innerText = `Good evening, ${obj.username}`
+            greet_element.innerText = `Good evening, ${obj.username}.`
         }
     })
 
@@ -103,9 +104,11 @@ const render = () => {
     focusData.map((obj) => {
         const focus_text = document.getElementById('focus_text')
         const focus_input = document.getElementById('focus_input')
+        const focus_pitch = document.getElementById('focus_pitch')
        
         focus_text.innerText = obj.focus
         focus_text.style.display = 'block'
+        focus_pitch.style.display = 'none'
         focus_input.style.display = 'none'
 
         const delBtn = document.createElement('button')
