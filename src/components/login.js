@@ -1,5 +1,4 @@
 import pageRender from "./pageRender.js";
-import display from "./display.js";
 
 const login = () => {
 
@@ -29,7 +28,7 @@ const loginInfo = (e) => {
 
             return console.log(true)
        }else{
-        return console.log(false)
+        return alert('Invalid credentials')
        }
     }) 
 }

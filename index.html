@@ -10,7 +10,24 @@
 </head>
 <body>
     <div id="app_container">
-        <div class="welcome-screen" id="welcome_screen" ></div>
+        <div class="welcome-screen" id="welcome_screen" >
+            <form id="signup_form">
+                <div id="form__group_username">
+                    <label for="username" class="form__label">Hello, What is your name?</label>
+                    <input type="text" name="username" id="username">
+                </div>
+
+                <div id="form__group_email" style="display: none">
+                    <label for="email" class="form__label">Please enter your email</label>
+                    <input type="email" name="email" id="email">
+                </div>
+
+                <div id="form__group_password" style="display: none">
+                    <label for="password" class="form__label">Please enter your password</label>
+                    <input type="password" name="password" id="password">
+                </div>
+            </form>
+        </div>
         <div class="login-screen" id="login_screen">
             <form id="login_form">
                 <p>Email</p>
@@ -38,8 +55,11 @@
                 <div>
                     <div id="focus_display">
                         <p id="focus_pitch">What is your main focus for today?</p>
-                        <input type="text" id="focus_input">
-                        <div id="focus_text" style="display: none"></div>
+                        <input type="text" id="focus_input" maxlength="30">
+                        <div id="focus_text_display" >
+                            <div id="focus_text"></div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

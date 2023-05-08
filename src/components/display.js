@@ -70,7 +70,7 @@ const deleteFocus = (e) => {
     saveFocus(focusData)
     document.getElementById('focus_input').style.display = 'block'
     document.getElementById('focus_pitch').style.display = 'block'
-    document.getElementById('focus_text').style.display = 'none'
+    document.getElementById('focus_text_display').style.display = 'none'
 
 }
 
@@ -102,16 +102,18 @@ const render = () => {
 
     // Render the focus display
     focusData.map((obj) => {
+        const focus_text_display = document.getElementById('focus_text_display')
         const focus_text = document.getElementById('focus_text')
         const focus_input = document.getElementById('focus_input')
         const focus_pitch = document.getElementById('focus_pitch')
        
         focus_text.innerText = obj.focus
-        focus_text.style.display = 'block'
+        focus_text_display.style.display = 'block'
         focus_pitch.style.display = 'none'
         focus_input.style.display = 'none'
 
         const delBtn = document.createElement('button')
+        delBtn.classList.add = 'delBtn'
         delBtn.innerText = 'Delete'
         delBtn.id = obj.id
         delBtn.onclick = deleteFocus
@@ -119,6 +121,7 @@ const render = () => {
     })
 }
 
+clock();
 render();
 
 }   

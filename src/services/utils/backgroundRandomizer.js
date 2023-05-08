@@ -36,7 +36,7 @@ const render =  () => {
   
   const imageIndex = randomIndex()
   const element = document.getElementById('app_container')
-  element.style.backgroundImage = `url("${images[imageIndex]}")`
+  element.style.backgroundImage = `url("${urls[imageIndex]}")`
   
 }
 

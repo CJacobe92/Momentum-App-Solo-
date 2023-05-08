@@ -23,7 +23,7 @@ const clock = () => {
 
     const time = document.getElementById('clock')
     const toggle = document.getElementById('clock_toggle')
-    toggle.checked === false ? time.innerText = hour12Clock.split('PM' || 'AM').join('') : time.innerText = hour24Clock
+    toggle.checked === false ? time.innerText = hour12Clock.split('PM' && 'AM').join('') : time.innerText = hour24Clock
 
     userData.map(user => {return toggle.checked = user.h12format})
 
