@@ -1,56 +1,47 @@
 const clock = () => {
 
-  
-    let userData;
+
+    let timeFormat;
 
     const getData = () => {
-        const loadData = JSON.parse(localStorage.getItem('userData'))
-        if(Array.isArray(loadData) && loadData.length > 0){
-            document.getElementById('welcome_screen').style.display = 'none'
-            document.getElementById('main').style.display = ''
-            return userData = loadData
-        }else {
-            return userData = []
-        }
-    }
-
-
-
- getData();
-        
-    const date = new Date ();
-    const hour12Clock = date.toLocaleTimeString('en-US', {hour12:true,hour:'numeric',minute:'numeric' , second:'numeric'});
-    const hour24Clock = date.toLocaleTimeString('en-US', {hour12:false,hour:'numeric',minute:'numeric', second:'numeric'});
-    
-
-    const time = document.getElementById('clock')
-    const toggle = document.getElementById('clock_toggle')
-    toggle.checked === false ? time.innerText = hour12Clock : time.innerText = hour24Clock
-        
-    userData.map(user => {return toggle.checked = user.h12format})
-
-   
-    const toggleTime = (format) => {
-        for(let user of userData){
-            if(format === true){
-                user.h12format = true
-            }else if(format === false) {
-                user.h12format = false
-
+        const loadData = JSON.parse(localStorage.getItem('24hr'))
+            if(typeof loadData === 'boolean'){
+                return timeFormat = loadData
+            }else{
+                return timeFormat = true
             }
-        }
-
-        localStorage.setItem('userData', JSON.stringify(userData));
+        
     }
-    
-    toggle.addEventListener('change', (e) => {
-        toggleTime(e.target.checked)
 
-    })
-    
-    setTimeout(()=>{clock(), 1000})
+    getData();
 
-    return parseInt(hour24Clock);
+    const date = new Date ();
+    const hour12Clock = date.toLocaleTimeString('en-US', {hour12:true,hour:'numeric',minute:'numeric'});
+    const hour24Clock = date.toLocaleTimeString('en-US', {hour12:false,hour:'numeric',minute:'numeric'});
+  
+    const toggleClock = () => {
+        if(timeFormat === true){
+            localStorage.setItem('24hr', JSON.stringify(false))
+        }else if(timeFormat === false){
+            localStorage.setItem('24hr', JSON.stringify(true))
+        }
+    }
+
+    const render = () => {
+        const time = document.getElementById('clock')
+        const toggle = document.getElementById('clock_toggle')
+        toggle.checked = timeFormat
+        toggle.onclick = toggleClock
+        
+        toggle.checked === false ? time.innerText = hour12Clock.split('PM' && 'AM').join('') : time.innerText = hour24Clock
+    }
+
+
+
+ render();  
+ 
+ setTimeout(()=>{clock(), 1000})
+ return parseInt(hour24Clock)
     
 }
 

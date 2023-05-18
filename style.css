@@ -1,64 +1,140 @@
-* , *::before, *::after{
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;500;600&family=Roboto:ital,wght@0,100;0,300;0,500;0,700;1,300&display=swap');
+
+*{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+
 }
 
 #app_container{
     min-height: 100vh;
     width: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-/* Login screen / Account creation screen */
+html{
+    background-color: black;
+}
 
-.welcome-screen{
+body{
+    animation: fadein 1.5s; 
+    background: linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75) );
     min-height: 100vh;
     width: 100%;
+}
+
+/* Login screen  */
+.login-screen {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1rem;
+}
+
+#user_email,  #user_password {
+    padding: 2px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 2rem;
+    width: 15rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+}
+
+#login_btn {
+    background-color: rgb(24, 166, 201);
+    margin-top: 10px;
+    color: white;
+    font-weight: bold;
+    width: 15rem;
+    height: 2.5rem;
+    font-size: 0.8rem;
+    border-color: #2196F3;
+    border-radius: 5px;
+    border:  0.5px;
+    cursor: pointer
+}
+
+/* Account creation screen */ 
+
+#signup_form {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+} 
+
+
+/* Welcome_screen */
+#form__group_username  , #form__group_email, #form__group_password{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
-.form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.form__label {
+    color: white;
+    margin: 10px;
+    font-size: 3rem;
 }
 
+.form__input {
+    display: flex;
+    color: white;
+    align-items: center;
+    width: 30rem;
+    height: 4rem;
+    text-align: center;
+    font-size: 3rem;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    border-bottom: 2px solid white;
+}
 /* Main screen */
 
-#main {
+#main_screen{
     min-height: 100vh;
     width: 100%;
-    padding: 0;
+    padding: 1rem;
     margin: 0;
     box-sizing: border-box;
     display: grid;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 12fr 1fr 1fr;
+    grid-template-columns: auto auto ;
+    grid-template-rows: auto 12fr auto;
     grid-template-areas: 
-    'links weather'
+    'logout weather'
     'display display'
     'quotes quotes'
     'settings todo_list';
 }
 
-.links {
-    grid-area: links;
+.logout {
+    grid-area: logout;
     display: flex;
     justify-content: left;
-  
+    align-items: flex-start ;
+   
 }
 
 .weather {
     grid-area: weather;
     display: flex;
     justify-content: right;
-   
+    
 }
 
 .display {
@@ -66,8 +142,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
+   
+}
+
+.quotes {
+    grid-area: quotes;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    
     
 }
+/* Display Design */
+
+
 
 .settings {
     grid-area: settings;
@@ -77,17 +167,12 @@
     
 }
 
-.quotes {
-    grid-area: quotes;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 .todo_list {
     grid-area: todo_list;
     display: flex;
     justify-content: right;
     align-items: end;
+  
 }
 
 /* Toggle Switch Start */
@@ -179,6 +264,13 @@ input:checked + .slider:before {
     justify-content: center;
     align-items: center;
     flex-direction: row;
+    user-select: none;
+}
+
+#clock {
+    font-size: 8rem;
+    margin: 10px;
+    color: white;
 }
 
 .display {
@@ -186,6 +278,7 @@ input:checked + .slider:before {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    user-select: none;
 }
 
 #show_focus {
@@ -196,6 +289,75 @@ input:checked + .slider:before {
     border: 1px solid black;
     width: 10rem;
 }
+
+#greet_element {
+    font-size: 2rem;
+    color: white;
+}
+
+#focus_display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: auto;
+}
+
+#focus_text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+}
+
+#focus_text_display {
+    width: 10rem;
+    display: flex;
+}
+
+#focus_pitch {
+    color: white;
+    font-size: 2rem;
+    margin-top: 1rem;
+}
+
+#focus_input{
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+    margin-top: 1rem;
+    border: none;
+    border-bottom: 1px solid white;
+    height: 4rem;
+    width: 70%;
+    background-color: rgba(0, 0, 0, 0);
+    outline: none;
+}
+
+
+#focus_text{
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+    margin-top: 1rem;
+    height: 4rem;
+    width: 60%;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#focus_text_display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.delBtn {
+    margin-left: 50px;
+}
+
+
+
 /* Todo List Modals */
 
 /* Modal Background */
@@ -217,36 +379,67 @@ input:checked + .slider:before {
 
 #form_popup {
     display: none;
-    position: fixed;
-    bottom: 2.5rem;
-    right: 15px;
-    border: 2px solid rgba(0, 0, 0, 0.5);
-    border-radius: 5px;
-    z-index: 9; 
+    position: absolute;
+    bottom: 6vh;
+    z-index: 9999; 
+    color: white;
 }
 
 #form_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     width: 15rem;
     height: 20rem;
-    background-color: white;
-    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 15px
 }
 
-#open_btn {
-    margin-right: 15px;
+.__open_btn {
+    margin-left: auto;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: white;
+    font-size: 1rem;
+}
+
+.__close_btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding-bottom: 5px;
 }
 
 #todo_app_title {
     display: flex;
+    width: 100%;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 #todo_input_text{
-    width: 13.8rem;
+    width: 100%;
+    height: 2rem;
+    border-radius: 3px;
+    outline: none;
+    border: none;
+    margin-top: 10px;
 }
 
 #todo_display {
+    width: 100%;
     margin: 5px;
     height: 15rem;
     overflow-y: auto;
@@ -259,8 +452,7 @@ input:checked + .slider:before {
 }
 
 #todo_checkbox{
-    margin-right: 10px;
-    margin-left: 5px;
+    padding-left: 5px;
 }
 #todo_inputs {
     display:flex;
@@ -269,8 +461,175 @@ input:checked + .slider:before {
     flex-direction: row;
 }
 
-#add_btn {
-    margin: 5px;
-    padding-left: 2px;
-    padding-right: 2px;
+.delete_btn {
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    line-height: 3px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
 }
+
+
+
+/* Settings popup */
+
+#settings_form_popup {
+    display: none;
+    position: absolute;
+    margin-right: auto;
+    z-index: 9999;
+    bottom: 6vh;
+}
+
+#settings_form_container {
+    width: 30rem;
+    height: 20rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+#settings_open_btn {
+    margin-right: auto;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: white;
+    font-size: 1rem;
+}
+
+#settings_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+
+#settings_display{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
+    height: 16rem;
+    padding: 5px;
+}
+
+#setting{
+    width: 10rem;
+    padding: 5px;
+    height: 16rem;
+}
+
+#option {
+    height: 15rem;
+    width: 18rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+
+}
+
+li:hover{
+    background-color: skyblue;
+}
+
+li {
+    list-style: none;
+    cursor: pointer;
+    padding: 5px;
+}   
+
+#opt_profile{
+    height: 100%;
+}
+
+#opt_background{
+    background-color: red;
+    height: 100%;
+}
+
+#opt_color{
+    background-color: blue;
+    height: 100%;
+}
+
+
+#opt_quote{
+    background-color: yellow;
+    height: 100%;
+}
+
+/* Settings - Profile */
+
+#prof_title{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+#opt_profile{
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+}
+
+#profile_form{
+    margin-top: 5px;
+    width: 100%;
+    padding: 10px;
+}
+
+#prof_form_group{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#saveProfileBtn{
+    margin-top: 3rem;
+    padding: 5px;
+    width: 100%;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 3px;
+}
+
+#editProfileBtn{
+    width: 3rem;
+    padding: 2px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+}
+
+.prof_form__input:disabled{
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 1rem;
+}
+
+.prof_form__input:enabled{
+    font-size: 1rem;
+    border: none;
+}
+/* Quotes */
+
+.quotes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
+    line-height: 1.5rem;
+}
+
+
