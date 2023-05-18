@@ -1,4 +1,5 @@
 import pageRender from "./pageRender.js";
+import display from "./display.js";
 
 const welcome = () => {
 
@@ -49,6 +50,7 @@ const welcome = () => {
         createIsLoggedInData(email)
         saveUserData();
         pageRender();
+        display();
     }
 
     const render = () => {
@@ -58,14 +60,14 @@ const welcome = () => {
         username.addEventListener('keydown', (e) => {
             if(e.key === 'Enter' && username.value !== ''){
                 fg_username.style.display = 'none'
-                fg_email.style.display = 'block'
+                fg_email.style.display = 'flex'
             }
         })
 
         email.addEventListener('keydown', (e) => {
             if(e.key === 'Enter' && email.value !== ''){
                 fg_email.style.display = 'none'
-                fg_password.style.display = 'block'
+                fg_password.style.display = 'flex'
             }
         })
 

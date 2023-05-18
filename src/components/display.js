@@ -1,4 +1,5 @@
 import clock from "../services/utils/clock.js"
+import settings from "./settings.js";
 
 const display = () => {   
 
@@ -68,9 +69,11 @@ const addFocus = () => {
 const deleteFocus = (e) => {
     removeFocus(parseInt(e.target.id))
     saveFocus(focusData)
-    document.getElementById('focus_input').style.display = 'block'
-    document.getElementById('focus_pitch').style.display = 'block'
+    document.getElementById('focus_input').style.display = 'flex'
+    document.getElementById('focus_pitch').style.display = 'flex'
     document.getElementById('focus_text_display').style.display = 'none'
+    document.getElementById('focus_input').value = ''
+
 
 }
 
@@ -108,12 +111,12 @@ const render = () => {
         const focus_pitch = document.getElementById('focus_pitch')
        
         focus_text.innerText = obj.focus
-        focus_text_display.style.display = 'block'
+        focus_text_display.style.display = 'flex'
         focus_pitch.style.display = 'none'
         focus_input.style.display = 'none'
 
         const delBtn = document.createElement('button')
-        delBtn.classList.add = 'delBtn'
+        delBtn.classList = 'delBtn'
         delBtn.innerText = 'Delete'
         delBtn.id = obj.id
         delBtn.onclick = deleteFocus
@@ -123,7 +126,6 @@ const render = () => {
 
 clock();
 render();
-
 }   
 
 export default display

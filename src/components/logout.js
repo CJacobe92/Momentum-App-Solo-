@@ -7,6 +7,8 @@ const logout = () => {
 const signOff = () => {
     window.localStorage.removeItem('isLoggedIn')
     window.localStorage.removeItem('todos')
+    const focus_input = document.getElementById('focus_input')
+    focus_input.value = ''
     login();
     pageRender();
   

@@ -24,11 +24,24 @@ const createTodoData = (title) => {
     })
 }
 
+
 const removeTodoData = (todoId) => {
 
-    const todoIndex = todos.findIndex((obj) => obj.id === todoId )
+    // const todoIndex = todos.findIndex((obj) => obj.id === todoId )
 
-    return todoIndex > -1 ? todos.splice(todoIndex, 1) : todos
+
+
+    // return todoIndex > -1 ? todos.splice(todoIndex, 1) : todos
+
+    todos = todos.filter(todo => {
+        if(todo.id === parseInt(todoId) && todo.completed === true){
+
+            return false
+        }else{
+            return true
+        }
+    })
+
 
 }
 
@@ -40,7 +53,7 @@ const saveTodoData = (todos) => {
 // Controller
 
 const openForm = () => {
-    document.getElementById('form_popup').style.display = "block"
+    document.getElementById('form_popup').style.display = "flex"
     console.log('clicked')
 }
 
@@ -58,22 +71,40 @@ const addTodoData = () => {
         saveTodoData(todos)
         render()
     }
-    
+  
 }
 
 const deleteTodo = (e) => {
    const todoId = e.target.id
-   
    removeTodoData(parseInt(todoId))
    saveTodoData(todos)
    render();
 
 }
 
-// Event Listener for todo input
+const selectedTodo = (e) => {
+    const todoId = e.target.id
+    const selected = e.target.checked
+    
+    todos.map(todo => {
+        if(todo.id === parseInt(todoId)){
+            todo.completed = selected
+            
+        }
+        saveTodoData(todos)
+    })
+    render();
+}
 
-document.getElementById('todo_input_text').addEventListener('keydown', (e) => {
-    e.key === 'Enter' ? addTodoData() : false
+// Event Listener for todo input
+const todo_input_text = document.getElementById('todo_input_text')
+todo_input_text.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter'){
+        addTodoData();
+        todo_input_text.value = ""
+    }else{
+        return false
+    }
 })
 
 // View
@@ -86,10 +117,8 @@ const render = () => {
     const close_btn = document.getElementById('close_btn')
     close_btn.onclick = closeForm;
 
-    // event listener for todo input enter
-
-    const add_btn = document.getElementById('add_btn')
-    add_btn.onclick = addTodoData
+    // const add_btn = document.getElementById('add_btn')
+    // add_btn.onclick = addTodoData
 
     
 
@@ -98,6 +127,7 @@ const render = () => {
     todos.map(todo => {
         const element = document.getElementById('todo_display')
         const todo_container = document.createElement('div')
+       
         todo_container.id = 'todo_container'
         element.appendChild(todo_container)
 
@@ -108,11 +138,16 @@ const render = () => {
 
         const checkbox = document.createElement('input')
         checkbox.type = 'checkbox'
-        checkbox.id = 'todo_checkbox'
-        title.prepend(checkbox)
+        checkbox.classList.add('todo_checkbox')
+        checkbox.id = todo.id
+        checkbox.checked = todo.completed
+        checkbox.checked === true ? title.style.textDecoration = 'line-through' :
+        false
+        checkbox.onclick = selectedTodo
+        todo_container.prepend(checkbox)
         
         const deleteBtn = document.createElement('button')
-        deleteBtn.innerText = 'Delete'
+        deleteBtn.innerHTML = '&times;'
         deleteBtn.className = 'delete_btn'
         deleteBtn.id = todo.id
         deleteBtn.onclick = deleteTodo;

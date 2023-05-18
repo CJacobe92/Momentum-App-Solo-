@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Momentum App v2</title>
     <link rel="stylesheet" href="style.css">
+
     <script src="index.js" type="module" defer></script>
+    <script src="https://kit.fontawesome.com/04a9d2d8e6.js" crossorigin="anonymous" defer></script>
+
 </head>
 <body>
     <div id="app_container">
@@ -14,27 +17,29 @@
             <form id="signup_form">
                 <div id="form__group_username">
                     <label for="username" class="form__label">Hello, What is your name?</label>
-                    <input type="text" name="username" id="username">
+                    <input type="text" name="username" id="username" class="form__input">
                 </div>
 
                 <div id="form__group_email" style="display: none">
                     <label for="email" class="form__label">Please enter your email</label>
-                    <input type="email" name="email" id="email">
+                    <input type="email" name="email" id="email" class="form__input" required>
                 </div>
 
                 <div id="form__group_password" style="display: none">
                     <label for="password" class="form__label">Please enter your password</label>
-                    <input type="password" name="password" id="password">
+                    <input type="password" name="password" id="password" class="form__input">
                 </div>
             </form>
         </div>
         <div class="login-screen" id="login_screen">
             <form id="login_form">
-                <p>Email</p>
-                <input type="email" id="user_email">
-                <p>Password</p>
-                <input type="password" id="user_password">
-                <input type="submit">
+                <div>
+                    <p>Email</p>
+                    <input type="email" id="user_email">
+                    <p>Password</p>
+                    <input type="password" id="user_password">
+                </div>
+                <button type="submit" id="login_btn">LOGIN</button> 
             </form>
         </div>            
         <div id="main_screen">
@@ -55,31 +60,86 @@
                 <div>
                     <div id="focus_display">
                         <p id="focus_pitch">What is your main focus for today?</p>
-                        <input type="text" id="focus_input" maxlength="30">
+                        <input type="text" id="focus_input" maxlength="20">
                         <div id="focus_text_display" >
-                            <div id="focus_text"></div>
+                            <p id="focus_text"></p>
                         </div>
                         
                     </div>
                 </div>
             </div>
-            <div class="settings">Settings</div>
+            <div class="settings">
+                <button class="__settings_open_btn" id="settings_open_btn">Settings</button>
+
+                <div id="settings_form_popup">
+                    <div id="settings_form_container">
+                        <div id="settings_title">
+                            <h3>Settings</h3>
+                            <div class="class__settings_close_btn" id="settings_close_btn">&times;</div>
+                        </div>
+                        <div id="settings_display">
+                            <div id="setting">
+                                <li class="set_selection" id="profile">Profile</li>
+                                <li class="set_selection" id="background">Background</li>
+                                <li class="set_selection" id="color">Color Scheme</li>
+                                <li class="set_selection" id="quote">Personal Quote</li>
+                            </div>
+                            <div id="option">
+                                <div class='set_option' id="opt_profile" style="display: flex">
+                                    <div id="prof_title">
+                                        <h4>My Profile</h4>
+                                        <button id="editProfileBtn">Edit</button>
+                                    </div>
+                                    <form id="profile_form">
+                                        <div id="prof_form_group">
+                                            <label for="username" class="prof_form_label">Name:</label>
+                                            <input type="text" name="username" id="form_prof_username" class="prof_form__input" disabled>
+                                        </div>
+
+                                        <div id="prof_form_group">
+                                            <label for="email" class="prof_form_label">Email:</label>
+                                            <input type="email" name="email" id="form_prof_email" class="prof_form__input" disabled>
+                                        </div>
+
+                                        <div id="prof_form_group">
+                                            <label for="password" class="prof_form_label">Password:</label>
+                                            <input type="password" name="password" id="form_prof_password" class="prof_form__input"  disabled>
+                                        </div>
+                                        <button type="submit" id="saveProfileBtn">Save</button>
+                                    </form>
+                                    
+                                </div>
+                                <div class='set_option' id="opt_background" style="display: none">
+                                    <div>
+                                        <input type="file" id="myFile" name="filename" multiple>
+                                        <button id="btnAddImg">Submit</button>
+                                    </div>
+                                </div>
+                                <div class='set_option' id="opt_color" style="display: none">Color Scheme</div>
+                                <div class='set_option' id="opt_quote" style="display: none">Personal Quote</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="quotes">
+                <div id="quotes_title"></div>
+                <div id="quotes_author"></div>
+            </div>
             <div class="todo_list" id="todo_list">
                 <button class="__open_btn" id="open_btn" >Todo</button>
 
                 <div id="form_popup">
                     <div id="form_container">
                         <div id="todo_app_title">
-                            <h3>Todo List</h3>
+                            <h4>My Todos</h4>
                             <button class="__close_btn" id="close_btn">&times;</button>
                         </div>
 
-                        <div id="todo_inputs">
-                            <input type="text" id="todo_input_text">
-                            <button id="add_btn">&plus;</button>
-                        </div>
-                        
-
+                
+                        <input type="text" id="todo_input_text">
+                            <!-- <button id="add_btn">&plus;</button> -->
+                    
                         <div id="todo_display"></div>
                     </div>
                 </div>

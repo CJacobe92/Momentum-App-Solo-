@@ -1,5 +1,6 @@
 const backgroundImageRandomizer = () => {
 
+  // default images
 const urls = [
   "https://images.unsplash.com/photo-1505765050516-f72dcac9c60e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
   "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80",
@@ -9,40 +10,69 @@ const urls = [
   "https://images.unsplash.com/photo-1496568816309-51d7c20e3b21?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1931&q=80"
 ] 
 
-let images;
+//load personal images from IndexeDB
 
-const getImage = () => {
-    const loadImages = JSON.parse(localStorage.getItem('images'))
-    if(Array.isArray(loadImages)){
-      return images = loadImages
-    }else{
-      return images = []
-    }
-}
 
-getImage();
 
-const saveImages = (urls) => {
-  localStorage.setItem('images', JSON.stringify(urls))
-}
-onload = () => {saveImages(urls)}
 
-const randomIndex = () => {
-  const index = Math.floor(Math.random() * images.length)
+
+const randomIndex = (arr) => {
+  const index = Math.floor(Math.random() * arr.length)
   return index 
 }
 
 const render =  () => {
-  
-  const imageIndex = randomIndex()
-  const element = document.getElementById('app_container')
-  element.style.backgroundImage = `url("${urls[imageIndex]}")`
+
+  let db;
+
+   const request = indexedDB.open('Database')
+
+  request.onsuccess = (e) => {
+    console.log('Database loaded successfully')
+
+    db = e.target.result
+    loadImage();
+  }
+
+  request.onerror = (e) => {
+    console.log(`An error occured ${e.target.error.message}`)
+  }
+
+  const makeTX = (storeName, mode) => {
+    let tx = db.transaction(storeName, mode)
+    tx.onerror = (e) => {
+      console.log(e.target.error.message)
+    }
+    return tx
+  }
+
+  const loadImage = () => {
+      const tx = makeTX('images', 'readonly')
+      const store = tx.objectStore('images')
+      const allImages = store.getAll();
+      const element = document.getElementById('app_container')
+      allImages.onsuccess = (e) => {
+         let images = e.target.result
+
+         if(images.length > 0){
+          const index = randomIndex(images)
+          element.style.backgroundImage = `url("${images[index].image}")`    
+
+         }else{
+          const imageIndex = randomIndex(urls)
+          const element = document.getElementById('app_container')
+          element.style.backgroundImage = `url("${urls[imageIndex]}")`
+         }
+      }
+  }
+    
+
   
 }
 
 render();
 
-setTimeout(() => {backgroundImageRandomizer()}, 300000)
+setTimeout(() => {backgroundImageRandomizer()}, 10000)
 
 }
 
