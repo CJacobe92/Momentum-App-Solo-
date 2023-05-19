@@ -76,40 +76,81 @@ const updateUserPassword = () => {
 
 // Background Images
 
-
-const addBackgroundImage = () => {
-
+const addImage = () => {
     let db;
 
-    const request = indexedDB.open('Database', 1)
+    const request = indexedDB.open('Database')
 
     request.onsuccess = (e) => {
-        console.log('BGImage onsuccess called')
+        // console.log('BGImage onsuccess called')
         db = e.target.result
-        addImage();
+        selectMultiple();
     }
 
     request.onerror = () => {
         console.log(e.target.error.message)
     }
 
-    request.onupgradeneeded = (e) => {
-        console.log('onupgradeneeded is called')
+    const makeTXN = (objectStoreName, mode) => {
+        let tx = db.transaction(objectStoreName, mode)
+        return tx
+    }
 
 
+    const selectMultiple = () => {
+        const myFile = document.getElementById('myFile')
+        myFile.addEventListener('change', (e) => {
+            const document = e.target.files
+
+            Object.keys(document).map(item => {
+                const file = document[item]
+                const reader = new FileReader();
+                reader.readAsDataURL(file)
+
+                reader.onloadend = () => {
+
+                    let template = {
+                        name: file.name,
+                        image: reader.result
+                    }
+
+                    let tx = makeTXN('images', 'readwrite')
+                    let object = tx.objectStore('images')
+                    object.add(template) 
+                    
+                    backgroundImageRandomizer();
+                    renderImages();
+                    setTimeout(() => {myFile.value = null;  }, 1000)
+                    clearTimeout();
+                }
+
+            })
+
+        }) 
+    }
+}
+
+    
+
+
+const removeImage = (e) => {
+    
+    let db;
+    let id = e.target.id
+
+    const request = indexedDB.open('Database')
+
+    request.onsuccess = (e) => {
+        // console.log('BGImage onsuccess called')
         db = e.target.result
-        
-        // if(!db.objectStoreNames.contains('images')){
-            const store = db.createObjectStore('images', {keyPath: 'id', autoIncrement: true})
+        deleteImage();
+    }
 
-            // Indexes
-            store.createIndex('id', 'id', {unique: true})
-            store.createIndex('image', 'image', {unique: false})
-        // }
-        
-    } 
+    request.onerror = () => {
+        console.log(e.target.error.message)
+    }
 
-    const myTXN = (objectStoreName, mode) => {
+    const makeTXN = (objectStoreName, mode) => {
         let tx = db.transaction(objectStoreName, mode)
         tx.onerror= (e) => {
             console.log(e.target.error.message)
@@ -117,35 +158,16 @@ const addBackgroundImage = () => {
         return tx
     }
     
-    const addImage = () => {
-        let myFile = document.getElementById('myFile')
-        myFile.addEventListener('change', (e) => {
-            const files = e.target.files
-    
-            Object.keys(files).map( i => {
-                const file = files[i]
-                const reader = new FileReader();
-                reader.readAsDataURL(file)
-                
-                reader.addEventListener('load', () => {
-                    document.getElementById('btnAddImg').addEventListener('click', () => {
-                        let tx = myTXN('images', 'readwrite')
-                        let store = tx.objectStore('images')
-                        let item = {
-                            image: reader.result
-                        }
-                        store.add(item)
-                        document.getElementById('myFile').value = ""
-                        backgroundImageRandomizer();
-                        
-                    })
-                    
-                })
-                })
-        })
+    const deleteImage = () => {
+        let tx = makeTXN ('images', 'readwrite')
+        let objectStore =  tx.objectStore('images')
+        objectStore.delete(parseInt(id))
+        
     }
-}
 
+    renderImages();
+    backgroundImageRandomizer();
+}
 
 // Option
 
@@ -236,12 +258,78 @@ const closeForm = () => {
             editProfileBtn.onclick = editProfile;
         })
 
+        // Background Image
 
         
-   } 
+} 
 
-addBackgroundImage();
+
+const renderImages = () => {
+
+    let db;
+    
+    const request = indexedDB.open('Database')
+
+    request.onsuccess = (e) => {
+        // console.log('BGImage onsuccess called')
+        db = e.target.result
+        listImages();
+    }
+
+    request.onerror = (e) => {
+        console.log(e.target.error.message)
+    }
+
+    const makeTXN = (objectStoreName, mode) => {
+        let tx = db.transaction(objectStoreName, mode)
+        tx.onerror= (e) => {
+            console.log(e.target.error.message)
+        }
+        return tx
+    }
+
+    const listImages = async () => {
+        let tx = await makeTXN('images', 'readwrite').objectStore('images')
+        let data = await tx.getAll();
+        
+        data.onsuccess = () => {
+            const images = data.result
+
+            document.getElementById('listImages').innerHTML = ""
+
+            images.map(image => {
+                const element = document.getElementById('listImages')
+                const picItems = document.createElement('div')
+                picItems.id = 'picItems'
+                element.appendChild(picItems)
+
+                const picture = document.createElement('div')
+                const string = image.name
+                const length = 20
+                const trimmedString = string.substring(0, length)
+                picture.innerText = trimmedString
+                picItems.appendChild(picture)
+                // Delete the images
+                
+                const BtnRemoveImg = document.createElement('button')
+                BtnRemoveImg.innerText = 'Remove'
+                BtnRemoveImg.id = image.id
+                BtnRemoveImg.onclick = removeImage;
+                picItems.appendChild(BtnRemoveImg)
+
+            })
+        }   
+
+    }
+}
+
 render();
+// addBackgroundImage();
+
+onload = () => {
+renderImages();
+addImage();
+}
 
 }
 export default settings;

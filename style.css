@@ -485,9 +485,9 @@ input:checked + .slider:before {
 
 #settings_form_container {
     width: 30rem;
-    height: 20rem;
+    height: 25rem;
     background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px;
+    padding: 1rem;
     border-radius: 5px;
     color: white;
 }
@@ -514,19 +514,25 @@ input:checked + .slider:before {
     align-items: flex-start;
     flex-direction: row;
     height: 16rem;
-    padding: 5px;
+    padding: 10px;
 }
 
 #setting{
-    width: 10rem;
-    padding: 5px;
-    height: 16rem;
+    width: 12rem;
+    height: 20rem;
+    padding-right: 10px;
+    border: 1px solid white;
 }
 
 #option {
-    height: 15rem;
-    width: 18rem;
-    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    height: 20rem;
+    width: 25rem;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: rgba(0, 0, 0, 0);
+    border-left: 1px solid white;
+    padding-left: 10px;
+    border: 1px solid white;
 
 }
 
@@ -542,43 +548,39 @@ li {
 
 #opt_profile{
     height: 100%;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+  
 }
 
 #opt_background{
-    background-color: red;
     height: 100%;
-}
 
-#opt_color{
-    background-color: blue;
-    height: 100%;
 }
 
 
 #opt_quote{
     background-color: yellow;
     height: 100%;
+  
 }
 
 /* Settings - Profile */
 
-#prof_title{
+#settings_title{
     display: flex;
-    width: 100%;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-}
-#opt_profile{
-    display: flex;
-    align-items: start;
-    flex-direction: column;
+   
 }
 
 #profile_form{
     margin-top: 5px;
+    margin-right: 3px;
     width: 100%;
-    padding: 10px;
+    padding: 5px;
+    font-size: small;
 }
 
 #prof_form_group{
@@ -588,10 +590,11 @@ li {
     align-items: center;
     margin-top: 10px;
     margin-bottom: 10px;
+    margin-right: 10px;
 }
 
 #saveProfileBtn{
-    margin-top: 3rem;
+    margin-top: 1rem;
     padding: 5px;
     width: 100%;
     cursor: pointer;
@@ -621,6 +624,38 @@ li {
 .prof_form__input:enabled{
     font-size: 1rem;
     border: none;
+}
+
+/* Settings - Background */
+#background_container {
+    padding: 5px;
+}
+
+#uploadForm {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+#uploadStatus{
+    height: 1rem;
+}
+
+#listImages{
+    display: flex;
+    flex-direction: column;
+    height: 10rem;
+    border: 1px solid white;
+    overflow-y: scroll;
+    margin: 5px;
+}
+
+
+#picItems{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3px;
 }
 /* Quotes */
 

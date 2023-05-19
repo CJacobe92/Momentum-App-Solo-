@@ -81,12 +81,11 @@
                             <div id="setting">
                                 <li class="set_selection" id="profile">Profile</li>
                                 <li class="set_selection" id="background">Background</li>
-                                <li class="set_selection" id="color">Color Scheme</li>
                                 <li class="set_selection" id="quote">Personal Quote</li>
                             </div>
                             <div id="option">
                                 <div class='set_option' id="opt_profile" style="display: flex">
-                                    <div id="prof_title">
+                                    <div id="settings_title">
                                         <h4>My Profile</h4>
                                         <button id="editProfileBtn">Edit</button>
                                     </div>
@@ -110,10 +109,17 @@
                                     
                                 </div>
                                 <div class='set_option' id="opt_background" style="display: none">
-                                    <div>
-                                        <input type="file" id="myFile" name="filename" multiple>
-                                        <button id="btnAddImg">Submit</button>
+                                    <div id="settings_title">
+                                        <h4>My Background</h4>
                                     </div>
+                                    <div id="background_container">
+                                        <small>Personalized the momentum app with your favorite pictures</small>
+                                        <form id="uploadForm">
+                                            <input type="file" id="myFile" name="filename" multiple>
+                                        </form>
+                                    </div>
+                                    <div id="uploadStatus"></div>
+                                    <div id="listImages"></div>
                                 </div>
                                 <div class='set_option' id="opt_color" style="display: none">Color Scheme</div>
                                 <div class='set_option' id="opt_quote" style="display: none">Personal Quote</div>

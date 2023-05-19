@@ -1,5 +1,6 @@
 import pageRender from "./pageRender.js";
 import display from "./display.js";
+import imageDB from "../services/utils/imageDB.js";
 
 const welcome = () => {
 
