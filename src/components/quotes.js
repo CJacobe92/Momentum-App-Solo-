@@ -1,73 +1,89 @@
 const quotes = () => {
 
     const quotesData = [
+
         {
-            quote: "A rose by any other name would smell as sweet.	",
-            author: "William Shakespeare" 
-        },
-        {
-            quote: "All that glitters is not gold.",
-            author: "William Shakespeare" 
-        },
-        {
-            quote: "All the world’s a stage, and all the men and women merely players.",
-            author: "William Shakespeare" 
-        },
-        {
+            id: 1,
             quote: "Ask, and it shall be given you; seek, and you shall find.",
-            author: "the Bible" 
+            author: "the Bible" ,
+            remove: false
+
         },
         {
+            id: 2,
             quote: "Eighty percent of success is showing up.",
-            author: "Woody Allen" 
+            author: "Woody Allen",
+            remove: false
+ 
         },
         {
-            quote: "For those to whom much is given, much is required.",
-            author: "the Bible" 
-        },
-        {
-            quote: "Genius is one percent inspiration and ninety-nine percent perspiration",
-            author: "Thomas Edison" 
-        },
-        {
+            id: 3,
             quote: "If at first you don’t succeed, try, try again.",
-            author: "W. E. Hickson" 
+            author: "W. E. Hickson" ,
+            remove: false
+
         },
         {
-            quote: "Keep your friends close, but your enemies closer.",
-            author: "Michael Corleone" 
-        },
-        {
+            id: 4,
             quote: "No one can make you feel inferior without your consent.",
-            author: "Eleanor Roosevelt" 
+            author: "Eleanor Roosevelt" ,
+            remove: false
+
         },
         {
+            id: 5,
             quote: "Not all those who wander are lost.",
-            author: "J. R. R. Tolkein" 
+            author: "J. R. R. Tolkein" ,
+            remove: false
         },
         
     ]
 
-    const randomIndex = () => {
-        const index = Math.floor(Math.random() * quotesData.length)
+    let quotesArr;
+
+    const getData = () => {
+        const loadData = JSON.parse(localStorage.getItem('quotes'))
+        if(Array.isArray(loadData)){
+            return quotesArr = loadData
+        }else{
+            return quotesArr = []
+        }
+    }
+
+    getData()
+
+    const storeDefaultQuotes = () => {
+        localStorage.setItem('quotes', JSON.stringify(quotesData))
+    }
+
+    const randomIndex = (arr) => {
+        const index = Math.floor(Math.random() * arr.length)
         return index 
       }
 
     const render = () => {
-        const quotesIndex = randomIndex()
         const title = document.getElementById('quotes_title')
         const author = document.getElementById('quotes_author')
 
-
-        title.innerText = `"${quotesData[quotesIndex].quote}"`
-        author.innerText = `- ${quotesData[quotesIndex].author}`
-
+        if(quotesArr.length > 0 ){
+            const index = randomIndex(quotesArr)
+            title.innerText = `"${quotesArr[index].quote}"`
+            author.innerText = `- ${quotesArr[index].author}`
+        }else{
+            const index = randomIndex(quotesData)
+            title.innerText = `"${quotesData[index].quote}"`
+            author.innerText = `- ${quotesData[index].author}`
+        }
+        
     }
    
 
     render();
+    onload = () => {
+        storeDefaultQuotes();
+    }
     
-    setTimeout(() => {quotes();}, 10000)
+    setTimeout(() => {quotes();}, 1000)
 }
 
 export default quotes;

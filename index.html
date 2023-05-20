@@ -33,6 +33,8 @@
         </div>
         <div class="login-screen" id="login_screen">
             <form id="login_form">
+                <h4 id="login__title">Momentum App</h4>
+                <hr />
                 <div>
                     <p>Email</p>
                     <input type="email" id="user_email">
@@ -44,7 +46,7 @@
         </div>            
         <div id="main_screen">
             <div class="logout" id="logout"></div>
-            <div class="weather">Weather</div>
+            <div class="weather" ></div>
             <div class="display">
                 <div id="clock_display">
                     <div id="clock"></div>
@@ -121,8 +123,28 @@
                                     <div id="uploadStatus"></div>
                                     <div id="listImages"></div>
                                 </div>
-                                <div class='set_option' id="opt_color" style="display: none">Color Scheme</div>
-                                <div class='set_option' id="opt_quote" style="display: none">Personal Quote</div>
+                                <div class='set_option' id="opt_quote" style="display: none">
+                                    <div id="settings_title">
+                                        <h4>My Quotes</h4>
+                                    </div>
+                                    <div id="quoteInputContainer">
+                                        <div id="quote_fg">
+                                            <p>Quote: </p>
+                                            <input type="text" id="quoteText">
+                                            
+                                        </div>
+                                        <div id="quote_fg">
+                                            <p>Author: </p>
+                                            <input type="text" id="quoteAuthor">
+                                            
+                                        </div>
+                                        <button id="btnQuoteAdd">Add Quote</button>
+                                        
+                                    </div>
+                                   
+                                    <div id="quotesDisplay"></div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
