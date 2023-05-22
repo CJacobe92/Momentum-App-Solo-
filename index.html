@@ -21,17 +21,17 @@
         <div class="welcome-screen" id="welcome_screen" style="display: none">
             <h1 id="wc_app_title">Momentum App</h1>
             <div id="wc_container">
-                <form id="signup_form">
+                <form id="signup_form" autocomplete="off">
                     <small id="pitch">Get inspired with a daily photo and quote, set your daily focus, and track your to-dos.</small>
                     
                     <div id="form__group">
                         <label for="username" class="form__label">Hello, What is your name?</label>
-                        <input type="text" name="username" id="username" class="form__input" required autocomplete="false">
+                        <input type="text" name="username" id="username" class="form__input" required >
                     </div>
 
                     <div id="form__group" >
                         <label for="email" class="form__label">Please enter your email.</label>
-                        <input type="email" name="email" id="email" class="form__input" required autocomplete="false">
+                        <input type="email" name="email" id="email" class="form__input" required>
                     </div>
 
                     <div id="form__group" >
@@ -46,10 +46,10 @@
             <form id="login_form">
                 <h4 id="login__title">Momentum App</h4>
                 <hr />
-                <div>
-                    <p>Email</p>
+                <div id="login_container">
+                    <small>Email</small>
                     <input type="email" id="user_email">
-                    <p>Password</p>
+                    <small>Password</small>
                     <input type="password" id="user_password">
                 </div>
                 <button type="submit" id="login_btn">LOGIN</button> 
@@ -123,7 +123,12 @@
                                         </div>
                                         
                                     </form>
-                                    
+                                    <hr id="prof_hr"/>
+                                    <div id="removeData">
+                                        <p id="removeDataTitle">Remove your data</p>
+                                        <p>Delete your data from the database. <br />Warning: This action is irreversible!</p>
+                                        <button id="btnRemoveData">Remove</button>
+                                    </div>
                                 </div>
                                 <div class='set_option' id="opt_background" style="display: none">
                                     <div id="settings_title">
@@ -145,12 +150,12 @@
                                     <div id="quoteInputContainer">
                                         <div id="quote_fg">
                                             <p>Quote: </p>
-                                            <input type="text" id="quoteText">
+                                            <input type="text" id="quoteText" class="quote__input">
                                             
                                         </div>
                                         <div id="quote_fg">
                                             <p>Author: </p>
-                                            <input type="text" id="quoteAuthor">
+                                            <input type="text" id="quoteAuthor" class="quote__input">
                                             
                                         </div>
                                         <button id="btnQuoteAdd">Add Quote</button>
