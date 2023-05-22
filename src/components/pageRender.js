@@ -42,12 +42,14 @@ const render = () => {
             mainScreen.style.display = "grid"
             welcomeScreen.style.display = "none"
     }
-    else if(isLoggedIn.length === 0 && userData.length === 1){
+    
+    if(isLoggedIn.length === 0 && userData.length === 1){
             loginScreen.style.display = "flex"
             mainScreen.style.display = "none"
             welcomeScreen.style.display = "none"
     }
-    else if(isLoggedIn.length === 0 && userData.length === 0){
+    
+    if(isLoggedIn.length === 0 && userData.length === 0){
             loginScreen.style.display = "none"
             mainScreen.style.display = "none"
             welcomeScreen.style.display = "flex"
