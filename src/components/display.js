@@ -117,7 +117,7 @@ const render = () => {
 
         const delBtn = document.createElement('button')
         delBtn.classList = 'delBtn'
-        delBtn.innerText = 'Delete'
+        delBtn.innerHTML = '&#171;'
         delBtn.id = obj.id
         delBtn.onclick = deleteFocus
         focus_text.appendChild(delBtn)
@@ -126,6 +126,7 @@ const render = () => {
 
 clock();
 render();
+settings();
 }   
 
 export default display

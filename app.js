@@ -7,11 +7,10 @@ import pageRender from "./src/components/pageRender.js";
 import backgroundImageRandomizer from "./src/services/utils/backgroundRandomizer.js";
 import settings from "./src/components/settings.js";
 import quotes from "./src/components/quotes.js";
+import imageDB from "./src/services/utils/imageDB.js";
 
 const app = () => {
-  
-  
-  backgroundImageRandomizer();
+   
 
   quotes();
   pageRender();
@@ -21,8 +20,9 @@ const app = () => {
   todoList();
   logout();
   settings();
-
-  
+  imageDB()
+  backgroundImageRandomizer();
+ 
 }
 
 export default app;

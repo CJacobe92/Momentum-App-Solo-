@@ -13,9 +13,6 @@ const urls = [
 //load personal images from IndexeDB
 
 
-
-
-
 const randomIndex = (arr) => {
   const index = Math.floor(Math.random() * arr.length)
   return index 
@@ -28,7 +25,7 @@ const render =  () => {
    const request = indexedDB.open('Database')
 
   request.onsuccess = (e) => {
-    console.log('Database loaded successfully')
+    // console.log('Database loaded successfully')
 
     db = e.target.result
     loadImage();
@@ -38,18 +35,18 @@ const render =  () => {
     console.log(`An error occured ${e.target.error.message}`)
   }
 
-  const makeTX = (storeName, mode) => {
-    let tx = db.transaction(storeName, mode)
-    tx.onerror = (e) => {
-      console.log(e.target.error.message)
-    }
-    return tx
-  }
+  // const makeTX = async (storeName, mode) => {
+  //   let tx = await db.transaction(storeName, mode)
+  //   tx.onerror = (e) => {
+  //     console.log(e.target.error.message)
+  //   }
+  //   return tx
+  // }
 
-  const loadImage = () => {
-      const tx = makeTX('images', 'readonly')
-      const store = tx.objectStore('images')
-      const allImages = store.getAll();
+  const loadImage = async () => {
+      const tx = await db.transaction('images', 'readonly')
+      const store = await tx.objectStore('images')
+      const allImages = await store.getAll();
       const element = document.getElementById('app_container')
       allImages.onsuccess = (e) => {
          let images = e.target.result
@@ -72,7 +69,7 @@ const render =  () => {
 
 render();
 
-setTimeout(() => {backgroundImageRandomizer()}, 10000)
+setTimeout(() => {backgroundImageRandomizer()}, 300000)
 
 }
 

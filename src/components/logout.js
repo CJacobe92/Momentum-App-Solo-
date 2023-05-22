@@ -20,6 +20,7 @@ const render = () => {
     const logoutBtn = document.createElement('button')
     logoutBtn.innerText = 'Sign Off'
     logoutBtn.onclick = signOff
+    logoutBtn.id = 'btnSignOff'
     element.appendChild(logoutBtn)
 }
 
