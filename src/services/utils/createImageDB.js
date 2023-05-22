@@ -8,8 +8,7 @@ const createImageDB = () => {
      
      request.onsuccess = () => {
         let db = request.result
-        // console.log(`Onsuccess event called. Database: "${db.name}" exist loading database...`)
-        db.close();
+        console.log(`Onsuccess event called. Database: "${db.name}" exist loading database...`)
      }
     
     request.onupgradeneeded = () => {
@@ -27,9 +26,8 @@ const createImageDB = () => {
 
         }
 
-        // console.log('Database does not exist...')
-        // console.log('Onupgradedneeded event called. Database creation successful...')
-        db.close();
+        console.log('Database does not exist...')
+        console.log('Onupgradedneeded event called. Database creation successful...')
     } 
     
    
