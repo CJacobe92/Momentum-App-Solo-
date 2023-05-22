@@ -52,8 +52,8 @@ const quotes = () => {
 
     getData()
 
-    const storeDefaultQuotes = () => {
-        localStorage.setItem('quotes', JSON.stringify(quotesData))
+    const storeDefaultQuotes = (value) => {
+        localStorage.setItem('quotes', JSON.stringify(value))
     }
 
     const randomIndex = (arr) => {
@@ -74,16 +74,17 @@ const quotes = () => {
             title.innerText = `"${quotesData[index].quote}"`
             author.innerText = `- ${quotesData[index].author}`
         }
+
+        if(quotesArr.length < 4){
+            storeDefaultQuotes(quotesData)
+        }
         
     }
    
 
     render();
-    onload = () => {
-        storeDefaultQuotes();
-    }
-    
-    setTimeout(() => {quotes();}, 1000)
+   
+    setTimeout(() => {quotes();}, 300000)
 }
 
 export default quotes;

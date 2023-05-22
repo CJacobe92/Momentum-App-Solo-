@@ -28,6 +28,7 @@ body{
 }
 
 /* Login screen  */
+
 .login-screen {
     display: flex;
     min-height: 100vh;
@@ -36,6 +37,8 @@ body{
     align-items: center;
     color: white;
     font-size: 1rem;
+    background-color: rgba(0, 0, 0, 0.5);
+
 }
 
 #user_email,  #user_password {
@@ -75,39 +78,73 @@ hr{
 
 #signup_form {
     display: flex;
-    min-height: 100vh;
-    width: 100%;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 } 
 
 
 /* Welcome_screen */
-#form__group_username  , #form__group_email, #form__group_password{
+
+#welcome_screen{
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-}
+    min-height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
 
-.form__label {
-    color: white;
-    margin: 10px;
-    font-size: 3rem;
-}
+}   
 
-.form__input {
-    display: flex;
-    color: white;
-    align-items: center;
-    width: 30rem;
-    height: 4rem;
+#pitch {
+    line-height: 1rem;
     text-align: center;
-    font-size: 3rem;
-    outline: none;
-    background-color: rgba(0, 0, 0, 0);
-    border: none;
-    border-bottom: 2px solid white;
+    font-style: italic;
+}
+#wc_app_title{
+    padding: 2rem;
+    color: white;
+}
+#wc_container{
+    border-left: 1px solid rgba(255, 255, 255, 0.8);
+}
+#signup_form {
+    display: flex;
+    margin-left: 2rem;
+    padding: 1rem;
+    width: 22rem;
+    color: white;
+    border-radius: 5px;
+}
+
+#form__group{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.form__label{
+    padding-bottom: 5px;
+    font-weight: bold;
+}
+.form__input{
+    height: 2rem;
+    width: 20rem;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    outline-color: blue;
+}
+
+#btnRegister{
+    width: 20rem;
+    height: 3rem;
+    font-size: 1rem;
+    margin-top: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
 }
 /* Main screen */
 
@@ -526,6 +563,10 @@ input:checked + .slider:before {
     padding-bottom: 5px;
 }
 
+
+.set_selection{
+    width: 8rem;
+}
 #settings_title {
     display: flex;
     justify-content: space-between;
@@ -543,7 +584,6 @@ input:checked + .slider:before {
 }
 
 #setting{
-    width: 12rem;
     height: 20rem;
     padding: 10px;
     border: 1px solid rgba(255, 255, 255, 0.3);
@@ -552,11 +592,12 @@ input:checked + .slider:before {
 
 #option {
     height: 20rem;
-    width: 25rem;
+    width: 20rem;
     background-color: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 10px;
     color: white;
+ 
 }
 
 li:hover{
@@ -572,67 +613,86 @@ li {
 #opt_profile{
     height: 100%;
     display: flex;
-    align-items: start;
     flex-direction: column;
-  
 }
 
 #opt_background{
     height: 100%;
+    
 
 }
-
-
 #opt_quote{
     height: 100%;
+ 
   
 }
-
-/* Settings - Profile */
-
 #settings_title{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 5px;
    
 }
 
+/* Settings - Profile */
+
+
+
 #profile_form{
-    margin-top: 5px;
-    margin-right: 3px;
-    width: 100%;
     padding: 5px;
-    font-size: small;
 }
 
 #prof_form_group{
     display: flex;
-    width: 100%;
+    flex-direction: column; 
+    align-items: flex-start;
+}   
+
+.prof_form_label{
+    font-size: small;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.prof_form__input{
+    font-size: 0.8rem !important;
+    height: 2rem;
+    width:100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 3px;
+}
+
+#profile__Btn{
+    display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-right: 10px;
+    align-content: center;
+    width: 100%;
+    padding: 5px;
+    margin-top: 1rem;
 }
 
 #saveProfileBtn{
-    margin-top: 1rem;
     padding: 5px;
-    width: 100%;
     cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.5);
     border: none;
+    outline: none;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 3px;
 }
 
 #editProfileBtn{
-    width: 3rem;
-    padding: 2px;
+    padding: 5px;
     cursor: pointer;
-    background: none;
+    background: rgba(0, 0, 0, 0.5);
     border: none;
     outline: none;
     color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
 }
 
 .prof_form__input:disabled{
