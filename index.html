@@ -14,22 +14,28 @@
 <body>
     <div id="app_container">
         <div class="welcome-screen" id="welcome_screen" >
-            <form id="signup_form">
-                <div id="form__group_username">
-                    <label for="username" class="form__label">Hello, What is your name?</label>
-                    <input type="text" name="username" id="username" class="form__input">
-                </div>
+            <h1 id="wc_app_title">Momentum App</h1>
+            <div id="wc_container">
+                <form id="signup_form">
+                    <small id="pitch">Get inspired with a daily photo and quote, set your daily focus, and track your to-dos.</small>
+                    
+                    <div id="form__group">
+                        <label for="username" class="form__label">Hello, What is your name?</label>
+                        <input type="text" name="username" id="username" class="form__input" required autocomplete="false">
+                    </div>
 
-                <div id="form__group_email" style="display: none">
-                    <label for="email" class="form__label">Please enter your email</label>
-                    <input type="email" name="email" id="email" class="form__input" required>
-                </div>
+                    <div id="form__group" >
+                        <label for="email" class="form__label">Please enter your email.</label>
+                        <input type="email" name="email" id="email" class="form__input" required autocomplete="false">
+                    </div>
 
-                <div id="form__group_password" style="display: none">
-                    <label for="password" class="form__label">Please enter your password</label>
-                    <input type="password" name="password" id="password" class="form__input">
-                </div>
-            </form>
+                    <div id="form__group" >
+                        <label for="password" class="form__label">Please enter your password.</label>
+                        <input type="password" name="password" id="password" class="form__input" required autocomplete="false">
+                    </div>
+                    <button type="submit" id="btnRegister">Register</button>
+                </form>
+            </div>
         </div>
         <div class="login-screen" id="login_screen">
             <form id="login_form">
@@ -89,7 +95,7 @@
                                 <div class='set_option' id="opt_profile" style="display: flex">
                                     <div id="settings_title">
                                         <h4>My Profile</h4>
-                                        <button id="editProfileBtn">Edit</button>
+                                        
                                     </div>
                                     <form id="profile_form">
                                         <div id="prof_form_group">
@@ -106,7 +112,11 @@
                                             <label for="password" class="prof_form_label">Password:</label>
                                             <input type="password" name="password" id="form_prof_password" class="prof_form__input"  disabled>
                                         </div>
-                                        <button type="submit" id="saveProfileBtn">Save</button>
+                                        <div id="profile__Btn">
+                                            <button id="editProfileBtn">Edit</button>
+                                            <button type="submit" id="saveProfileBtn">Save</button>
+                                        </div>
+                                        
                                     </form>
                                     
                                 </div>

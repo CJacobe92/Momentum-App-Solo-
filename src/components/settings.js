@@ -1,6 +1,5 @@
 import display from "./display.js";
 import backgroundImageRandomizer from "../services/utils/backgroundRandomizer.js";
-import quotes from "./quotes.js";
 
 const settings = () => {
 
@@ -26,8 +25,8 @@ const username = document.getElementById('form_prof_username')
 const email = document.getElementById('form_prof_email')
 const password=  document.getElementById('form_prof_password')
 
-const editProfile = () => {
-
+const editProfile = (e) => {
+    e.preventDefault()
     username.disabled = false;
     email.disabled = false;
     password.disabled = false;
@@ -78,30 +77,22 @@ const updateUserPassword = () => {
     localStorage.setItem('userData', JSON.stringify(userData))
 }
 
-// Background Images
+// Add Background Images
 
-const addImage = (e) => {
-    let db;
+const addImage = () => {
 
-    const request = indexedDB.open('Database')
+    const request = indexedDB.open('ImageDB')
 
-    request.onsuccess = (e) => {
-        // console.log('BGImage onsuccess called')
-        db = e.target.result
-        selectMultiple();
+    request.onsuccess = () => {
+        let db = request.result
+        selectMultiple(db);
     }
 
     request.onerror = () => {
         console.log(e.target.error.message)
     }
 
-    const makeTXN = (objectStoreName, mode) => {
-        let tx = db.transaction(objectStoreName, mode)
-        return tx
-    }
-
-
-    const selectMultiple = () => {
+    const selectMultiple = (db) => {
         const myFile = document.getElementById('myFile')
         myFile.addEventListener('change', (e) => {
             const document = e.target.files
@@ -118,7 +109,7 @@ const addImage = (e) => {
                         image: reader.result
                     }
 
-                    let tx = makeTXN('images', 'readwrite')
+                    let tx = db.transaction('images', 'readwrite')
                     let object = tx.objectStore('images')
                     object.add(template) 
                     
@@ -135,17 +126,14 @@ const addImage = (e) => {
 }
 
     
-
-
 const removeImage = (e) => {
     
     let db;
     let id = e.target.id
 
-    const request = indexedDB.open('Database')
+    const request = indexedDB.open('ImageDB')
 
     request.onsuccess = (e) => {
-        // console.log('BGImage onsuccess called')
         db = e.target.result
         deleteImage();
     }
@@ -222,8 +210,6 @@ const createQuotes = (quote, author) => {
     })
 }
 
-
-
 const addQuotes = () => {
     const author = document.getElementById('quoteAuthor')
     const quoteText = document.getElementById('quoteText')
@@ -279,7 +265,7 @@ const closeForm = () => {
 }
 
 
-   const render = () => {
+const render = () => {
 
         const open_btn = document.getElementById('settings_open_btn')
         open_btn.onclick = openForm;
@@ -287,7 +273,7 @@ const closeForm = () => {
         const close_btn = document.getElementById('settings_close_btn')
         close_btn.onclick = closeForm;
 
-        document.getElementById('saveProfileBtn').addEventListener('click', (e)=> {
+        document.getElementById('profile_form').addEventListener('submit', (e)=> {
             e.preventDefault();
             saveData();
         })
@@ -314,68 +300,6 @@ const closeForm = () => {
             editProfileBtn.onclick = editProfile;
         })
 
-        // Background
-
-        const myFile = document.getElementById('myFile')
-        myFile.onchange = addImage;
-
-        let db;
-    
-        const request = indexedDB.open('Database')
-
-        request.onsuccess = (e) => {
-            // console.log('BGImage onsuccess called')
-            db = e.target.result
-            listImages();
-        }
-
-        request.onerror = (e) => {
-            console.log(e.target.error.message)
-        }
-
-        const makeTXN = (objectStoreName, mode) => {
-            let tx = db.transaction(objectStoreName, mode)
-            tx.onerror= (e) => {
-                console.log(e.target.error.message)
-            }
-            return tx
-        }
-
-        const listImages = async () => {
-            let tx = await makeTXN('images', 'readwrite').objectStore('images')
-            let data = await tx.getAll();
-            
-            data.onsuccess = () => {
-                const images = data.result
-
-                document.getElementById('listImages').innerHTML = ""
-
-                images.map(image => {
-                    const element = document.getElementById('listImages')
-                    const picItems = document.createElement('div')
-                    picItems.id = 'picItems'
-                    element.appendChild(picItems)
-
-                    const picture = document.createElement('div')
-                    const string = image.name
-                    const length = 20
-                    const trimmedString = string.substring(0, length)
-                    picture.innerText = trimmedString
-                    picItems.appendChild(picture)
-
-                    // Delete the images
-                    
-                    const BtnRemoveImg = document.createElement('button')
-                    BtnRemoveImg.innerHTML = '&times;'
-                    BtnRemoveImg.classList = 'BtnRemoveImg'
-                    BtnRemoveImg.id = image.id
-                    BtnRemoveImg.onclick = removeImage;
-                    picItems.appendChild(BtnRemoveImg)
-
-                })
-            }   
-
-        }
        
         //Quotes
         const element = document.getElementById('quotesDisplay')
@@ -404,8 +328,59 @@ const closeForm = () => {
             btnQuoteAdd.onclick = addQuotes;
         })
 
+        const renderImages = () => {
 
-        
+            const request = indexedDB.open('ImageDB')
+    
+            request.onsuccess = () => {
+                let db = request.result
+                listImages(db)
+            }
+    
+            request.onerror = () => {
+                console.log(request.result.error.message)
+            }
+    
+       
+            const listImages =  async (db) => {
+                let tx = await db.transaction('images', 'readwrite')
+                let object = await tx.objectStore("images")
+                let data = await object.getAll();
+                
+                data.onsuccess = () => {
+                    const images = data.result
+    
+                    document.getElementById('listImages').innerHTML = ""
+    
+                    images.map(image => {
+                        const element = document.getElementById('listImages')
+                        const picItems = document.createElement('div')
+                        picItems.id = 'picItems'
+                        element.appendChild(picItems)
+    
+                        const picture = document.createElement('div')
+                        const string = image.name
+                        const length = 20
+                        const trimmedString = string.substring(0, length)
+                        picture.innerText = trimmedString
+                        picItems.appendChild(picture)
+    
+                        // Delete the images
+                        
+                        const BtnRemoveImg = document.createElement('button')
+                        BtnRemoveImg.innerHTML = '&times;'
+                        BtnRemoveImg.classList = 'BtnRemoveImg'
+                        BtnRemoveImg.id = image.id
+                        BtnRemoveImg.onclick = removeImage;
+                        picItems.appendChild(BtnRemoveImg)
+    
+                    })
+                }   
+    
+            }
+           
+    }
+    renderImages();  
 } 
 
 

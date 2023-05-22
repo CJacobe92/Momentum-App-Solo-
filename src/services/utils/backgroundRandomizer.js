@@ -1,3 +1,5 @@
+
+
 const backgroundImageRandomizer = () => {
 
   // default images
@@ -10,62 +12,56 @@ const urls = [
   "https://images.unsplash.com/photo-1496568816309-51d7c20e3b21?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1931&q=80"
 ] 
 
-//load personal images from IndexeDB
-
-
 const randomIndex = (arr) => {
   const index = Math.floor(Math.random() * arr.length)
   return index 
 }
 
-const render =  () => {
+const render = () => {
 
-  let db;
 
-   const request = indexedDB.open('Database')
+    const el = document.getElementById('app_container')
 
-  request.onsuccess = (e) => {
-    // console.log('Database loaded successfully')
+    // Load default images if there are no personal images
 
-    db = e.target.result
-    loadImage();
-  }
+    const imageIndex = randomIndex(urls)
+    el.style.backgroundImage = `url("${urls[imageIndex]}")`
+    
+    // Make a db connection
+  
+    const request =  indexedDB.open('ImageDB')
 
-  request.onerror = (e) => {
-    console.log(`An error occured ${e.target.error.message}`)
-  }
+    request.onsuccess = (e) => {
 
-  // const makeTX = async (storeName, mode) => {
-  //   let tx = await db.transaction(storeName, mode)
-  //   tx.onerror = (e) => {
-  //     console.log(e.target.error.message)
-  //   }
-  //   return tx
-  // }
+      let db = e.target.result
+      loadImage(db);
+    }
 
-  const loadImage = async () => {
+    request.onerror = (e) => {
+      console.log(`An error occured ${e.target.error.message}`)
+    }  
+
+    const loadImage = async (db) => {
+
       const tx = await db.transaction('images', 'readonly')
       const store = await tx.objectStore('images')
       const allImages = await store.getAll();
-      const element = document.getElementById('app_container')
-      allImages.onsuccess = (e) => {
-         let images = e.target.result
 
-         if(images.length > 0){
-          const index = randomIndex(images)
-          element.style.backgroundImage = `url("${images[index].image}")`    
 
-         }else{
-          const imageIndex = randomIndex(urls)
-          const element = document.getElementById('app_container')
-          element.style.backgroundImage = `url("${urls[imageIndex]}")`
-         }
-      }
-  }
-    
-
-  
+        allImages.onsuccess = (e) => {
+            let data = e.target.result
+            const el = document.getElementById('app_container')
+          
+            try{
+              const index = randomIndex(data)
+              el.style.backgroundImage = `url("${data[index].image}")`
+            }catch(err){
+              console.log('No image present')
+            }
+        }
+     }  
 }
+
 
 render();
 
