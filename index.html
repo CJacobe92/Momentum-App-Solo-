@@ -12,8 +12,13 @@
 
 </head>
 <body>
+
+    <div id="loading">
+        <div id="loading-image" alt="Loading..."></div>
+    </div>
+
     <div id="app_container">
-        <div class="welcome-screen" id="welcome_screen" >
+        <div class="welcome-screen" id="welcome_screen" style="display: none">
             <h1 id="wc_app_title">Momentum App</h1>
             <div id="wc_container">
                 <form id="signup_form">
@@ -37,7 +42,7 @@
                 </form>
             </div>
         </div>
-        <div class="login-screen" id="login_screen">
+        <div class="login-screen" id="login_screen" style="display: none">
             <form id="login_form">
                 <h4 id="login__title">Momentum App</h4>
                 <hr />
@@ -50,7 +55,7 @@
                 <button type="submit" id="login_btn">LOGIN</button> 
             </form>
         </div>            
-        <div id="main_screen">
+        <div id="main_screen" style="display: none">
             <div class="logout" id="logout"></div>
             <div class="weather" ></div>
             <div class="display">
