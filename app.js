@@ -11,8 +11,9 @@ import createImageDB from "./src/services/utils/createImageDB.js";
 
 
 const app = () => {
-   
 
+ 
+   
   quotes();
   pageRender();
   welcome();

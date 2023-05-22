@@ -1,5 +1,6 @@
 import display from "./display.js";
 import backgroundImageRandomizer from "../services/utils/backgroundRandomizer.js";
+import pageRender from "./pageRender.js";
 
 const settings = () => {
 
@@ -265,6 +266,12 @@ const closeForm = () => {
 }
 
 
+const deleteMyData = () => {
+    localStorage.clear();
+    indexedDB.deleteDatabase('ImageDB')
+    pageRender();
+}
+
 const render = () => {
 
         const open_btn = document.getElementById('settings_open_btn')
@@ -381,6 +388,10 @@ const render = () => {
            
     }
     renderImages();  
+
+            // Delete Data
+            const deleteData = document.getElementById('btnRemoveData')
+            deleteData.onclick = deleteMyData;
 } 
 
 

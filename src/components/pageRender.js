@@ -32,28 +32,29 @@ const render = () => {
     
     // Handles the showing of the pages
 
-    if(isLoggedIn.length == 0 && userData.length > 0){
-        document.getElementById('login_screen').style.display = 'flex'
-        document.getElementById('main_screen').style.display = 'none'
-        document.getElementById('welcome_screen').style.display = 'none'
-    } 
-    
-    if(isLoggedIn.length > 0 && userData.length > 0){
-        document.getElementById('login_screen').style.display = 'none'
-        document.getElementById('main_screen').style.display = 'grid'
-        document.getElementById('welcome_screen').style.display = 'none'
-    }
-    
-    if(isLoggedIn.length == 0 && userData.length == 0 ){
-        document.getElementById('login_screen').style.display = 'none'
-        document.getElementById('main_screen').style.display = 'none'
-        document.getElementById('welcome_screen').style.display = 'flex'
-    }
+    const loginScreen =   document.getElementById('login_screen')
+    const mainScreen = document.getElementById('main_screen')
+    const welcomeScreen = document.getElementById('welcome_screen')
 
+       
+    if(isLoggedIn.length === 1 && userData.length === 1){
+            loginScreen.style.display = "none"
+            mainScreen.style.display = "grid"
+            welcomeScreen.style.display = "none"
+    }
+    else if(isLoggedIn.length === 0 && userData.length === 1){
+            loginScreen.style.display = "flex"
+            mainScreen.style.display = "none"
+            welcomeScreen.style.display = "none"
+    }
+    else if(isLoggedIn.length === 0 && userData.length === 0){
+            loginScreen.style.display = "none"
+            mainScreen.style.display = "none"
+            welcomeScreen.style.display = "flex"
+    }
 }
 
 render();
-
 }
 
 export default pageRender

@@ -1,9 +1,15 @@
 import clock from "../services/utils/clock.js"
+import pageRender from "./pageRender.js";
 import settings from "./settings.js";
 
 const display = () => {   
 
 // Model
+
+const targetNode = document.getElementById('loading')
+targetNode.addEventListener('load', (e) => {
+  console.log(e)
+})
 
 
 let userData;
@@ -127,6 +133,7 @@ const render = () => {
 clock();
 render();
 settings();
+pageRender();
 }   
 
 export default display
