@@ -5,7 +5,6 @@ import createImageDB from "../services/utils/createImageDB.js";
 const welcome = () => {
 
     // since this app doesn't have a database clearing the localstorage first to avoid issue
-    localStorage.clear();
 
     // Variables
 
