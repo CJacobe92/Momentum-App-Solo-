@@ -275,6 +275,7 @@ const closeForm = () => {
 const deleteMyData = () => {
     localStorage.clear();
     indexedDB.deleteDatabase('ImageDB')
+    window.location.reload();
     pageRender();
 }
 

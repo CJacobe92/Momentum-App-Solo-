@@ -27,11 +27,7 @@ const welcome = () => {
 
 
     const createUserData = (username, email, password) => {
-        userData.push({
-            username: username,
-            email: email,
-            password: password,   
-        })
+        Object.freeze(userData.push({username: username, email: email, password: password}))
     }
 
     const createIsLoggedInData = (email) => {
