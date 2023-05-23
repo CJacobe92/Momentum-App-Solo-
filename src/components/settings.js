@@ -212,14 +212,20 @@ const createQuotes = (quote, author) => {
 }
 
 const addQuotes = () => {
-    const author = document.getElementById('quoteAuthor')
-    const quoteText = document.getElementById('quoteText')
-    createQuotes(quoteText.value, author.value)
-    saveQuotes();
-    render();
-
-    quoteText.value = ""
-    author.value = ""
+    const author = document.getElementById('quoteAuthor').value
+    const quoteText = document.getElementById('quoteText').value
+    
+    if(author === '' && quoteText === ''){
+        return
+    }else{
+        createQuotes(quoteText.value, author.value)
+        saveQuotes();
+        render();
+    
+        quoteText.value = ""
+        author.value = ""
+    }
+   
 }
 
 // Option
